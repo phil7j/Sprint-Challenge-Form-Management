@@ -1,24 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
+import Register from './components/Register'
+import ViewData from './components/ViewData'
 import './App.css';
+import {Route, Link} from 'react-router-dom';
+import {useLocalStorage} from './components/useLocalStorage';
 
 function App() {
+  const [token, setToken] = useLocalStorage('token', '')
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+       <div className="nav">
+        <Link to="/">Register</Link>
+        <Link to="/viewdata">View Data</Link>
+        </div>
+         <Route exact path="/" render={(props)=> <Register setToken={setToken} {...props} />} />
+          <Route exact path="/viewdata" component={ViewData} />
     </div>
   );
 }
